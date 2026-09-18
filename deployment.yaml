@@ -6,40 +6,23 @@ metadata:
   labels:
     app: musicshop
 spec:
-  replicas: 3
+  replicas: 1 # <-- Impostato a 1 per girare su un solo nodo
   selector:
     matchLabels:
       app: musicshop
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 0
   template:
     metadata:
       labels:
         app: musicshop
     spec:
-      terminationGracePeriodSeconds: 60 # Dà tempo all'app di chiudere le connessioni al DB
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                  - musicshop
-              topologyKey: kubernetes.io/hostname
+      terminationGracePeriodSeconds: 30
+      # Il blocco affinity è stato rimosso per permettere al pod di stare su un unico nodo senza vincoli
       containers:
       - name: musicshop
-        # SOSTITUISCI con l'immagine Docker effettiva del tuo progetto
-        image: tuo-registry/musicshop:latest 
+        image: tuo-registry/musicshop:latest # <-- Ricorda di mettere la tua immagine
         imagePullPolicy: Always
         ports:
-        - containerPort: 8080 # <-- Modifica se la tua app usa una porta diversa
+        - containerPort: 8080 # <-- Modifica se usi una porta diversa
         envFrom:
         - configMapRef:
             name: musicshop-config
@@ -54,7 +37,7 @@ spec:
             memory: "512Mi"
         readinessProbe:
           httpGet:
-            path: / # <-- Sostituisci con la rotta di healthcheck, es. /health o /actuator/health
+            path: / 
             port: 8080
           initialDelaySeconds: 15
           periodSeconds: 10
