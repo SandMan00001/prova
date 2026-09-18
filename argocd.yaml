@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: musicshop-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/Digital-Booster/musicshop.git'
+    targetRevision: HEAD
+    path: k8s # Il nome della cartella dove hai messo i file 00 a 05
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: musicshop-prod
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
