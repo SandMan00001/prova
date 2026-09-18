@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: musicshop-lb
+  namespace: musicshop-prod
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: "external"
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "ip"
+    service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
+spec:
+  type: LoadBalancer
+  selector:
+    app: musicshop
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80 # La porta esposta su internet
+      targetPort: 8080 # La porta del tuo container
