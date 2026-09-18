@@ -18,8 +18,7 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
       - name: musicshop
-        # ATTENZIONE: MODIFICA LA RIGA QUI SOTTO CON LA TUA IMMAGINE REALE
-        image: INSERISCI_QUI_IL_LINK_ALLA_TUA_IMMAGINE:latest
+        image: ghcr.io/digital-booster/musicshop:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
