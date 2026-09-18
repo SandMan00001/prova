@@ -6,7 +6,7 @@ metadata:
   labels:
     app: musicshop
 spec:
-  replicas: 1 # <-- Impostato a 1 per girare su un solo nodo
+  replicas: 1
   selector:
     matchLabels:
       app: musicshop
@@ -16,13 +16,13 @@ spec:
         app: musicshop
     spec:
       terminationGracePeriodSeconds: 30
-      # Il blocco affinity è stato rimosso per permettere al pod di stare su un unico nodo senza vincoli
       containers:
       - name: musicshop
-        image: tuo-registry/musicshop:latest # <-- Ricorda di mettere la tua immagine
+        # ATTENZIONE: MODIFICA LA RIGA QUI SOTTO CON LA TUA IMMAGINE REALE
+        image: INSERISCI_QUI_IL_LINK_ALLA_TUA_IMMAGINE:latest
         imagePullPolicy: Always
         ports:
-        - containerPort: 8080 # <-- Modifica se usi una porta diversa
+        - containerPort: 8080
         envFrom:
         - configMapRef:
             name: musicshop-config
