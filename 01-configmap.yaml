@@ -5,6 +5,6 @@ metadata:
   namespace: musicshop-prod
 data:
   # Inserisci qui l'endpoint del tuo RDS su AWS
-  DB_HOST: "musicshop-db.cxxxxxxx.eu-west-1.rds.amazonaws.com"
+  DB_HOST: "demodb.c7isc0ge8qug.eu-west-1.rds.amazonaws.com"
   DB_PORT: "5432"
   DB_NAME: "musicshop"
