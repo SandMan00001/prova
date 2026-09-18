@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: musicshop-config
+  name: default
   namespace: musicshop-prod
 data:
   # Inserisci qui l'endpoint del tuo RDS su AWS
