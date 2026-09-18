@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: musicshop-app
-  namespace: musicshop-prod
+  namespace: default
   labels:
     app: musicshop
 spec:
